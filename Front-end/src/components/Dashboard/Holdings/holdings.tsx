@@ -25,6 +25,9 @@ export const Holdings = () => {
 
   useEffect(() => {
     function getPrice () {
+
+      console.log();
+
       const apiCallArray = holdings?.map(async (holding: NoPriceHoldingI) => {
         const price = Number((await getCurrentPrice(holding.ticker)).data.price)
         return {...holding, price };
