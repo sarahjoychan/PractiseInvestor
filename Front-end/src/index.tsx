@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -9,6 +8,11 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import reducers from './reducers';
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // eslint-disable-next-line max-len
 const store = createStore(reducers, composeEnhancers( // thunk allows us to handle asynchronous actions in redux

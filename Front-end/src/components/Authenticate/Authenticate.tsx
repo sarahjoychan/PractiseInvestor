@@ -17,8 +17,18 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
 import { register, login } from '../../actions/authenticate';
-import DefaultFormI from './defaultFormI';
 
+interface DefaultFormI {
+  userName: string,
+  password: string,
+  confirmPassword: string,
+}
+
+/* interface DefaultFormI {
+  userName: string,
+  password: string,
+  confirmPassword: string,
+} */
 
 const Authenticate = () => {
   const classes = useStyles();
@@ -31,21 +41,33 @@ const Authenticate = () => {
   });
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history: any = useHistory();
 
   const handleShowPassword = () => {
     setShowPassword((previousShowPassword) => (previousShowPassword === 'password' ? 'text' : 'password'));
   };
 
-  const handleSubmit = (e: SyntheticEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-
     if (isRegister) {
       // dispatch an action to signup
-      dispatch(register(form, history));
+      if (form.userName && form.password && form.confirmPassword) {
+        if (form.password === form.confirmPassword) {
+          dispatch(register(form, history)); 
+        } else {
+          setForm(current => ({...current, password: '', confirmPassword: ''}));
+          alert(`Passwords don't match, try again`);
+        }
+      } else {
+        alert(`Please fill out all fields`)
+      }
     } else {
-      // dspatch an action to sign in
-      dispatch(login(form, history));
+      if (form.userName && form.password) {
+        // dspatch an action to sign in
+        dispatch(login(form, history));
+      } else {
+        alert(`Please fill out all fields`)
+      }
     }
   };
 
@@ -68,7 +90,7 @@ const Authenticate = () => {
         <Typography component="h1" variant="h5">
           {isRegister ? 'Register' : 'Login'}
         </Typography>
-        <form className={classes.form} onSubmit={() => handleSubmit} noValidate>
+        <form className={classes.form} onSubmit={(e) => handleSubmit(e)} noValidate>
           <TextField
             variant="outlined"
             margin="normal"

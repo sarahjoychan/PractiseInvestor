@@ -7,3 +7,10 @@ export interface StockI {
   quantity: number
   ticker: string
 }
+
+export interface BasicStockI {
+  name: string
+  symbol: string
+  __v: number
+  _id: string
+}

@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
   timestamps: true, // creates an createdat and updated at field whenever a document is created
 });
 // Mongoose automatically looks for the plural, lowercased version of your model name. Thus,
-// for the example above, the model Post is for the posts collection in the database.
+// for the example above, the model User is for the users collection in the database.
 module.exports = mongoose.model('User', userSchema);
 
 /*

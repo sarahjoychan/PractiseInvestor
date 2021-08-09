@@ -9,13 +9,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   const auth = useSelector((state: any) => state.authenticate);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-
   useEffect(() => {
-    let tokenObject: any = localStorage.getItem('home');
-    tokenObject ? tokenObject = JSON.parse(tokenObject) : tokenObject = null;
-
+    const tokenObject: any = localStorage.getItem('home');
     if (tokenObject) {
-      const token = tokenObject.token;
+      const token = JSON.parse(tokenObject).token;
       const tokenExpiration = jwtDecode<JwtTokenI>(token).exp;
       const dateNow = new Date();
 
@@ -27,7 +24,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     } else {
       setIsAuthenticated(false);
     }
-    // eslint-disable-next-line
   }, [auth])
 
   if (isAuthenticated === null) {

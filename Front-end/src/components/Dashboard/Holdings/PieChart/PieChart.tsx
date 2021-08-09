@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import Chart from 'react-apexcharts';
 import {Paper, Box, Typography} from '@material-ui/core';
+import {ChartI} from '../../../../interfaces/Chart'
 
 interface Props {
   cash: number
@@ -11,8 +12,8 @@ interface Props {
 
 export const PieChart = ({ cash, portfolioValue, holdingsValue }: Props) => {
   
-  const [chart, setChart] = useState({
-    series: [Number(holdingsValue.toFixed(2)), Number(cash.toFixed(2))],
+  const [chart, setChart] = useState<ChartI>({
+    series: [Number(holdingsValue?.toFixed(2)), Number(cash?.toFixed(2))],
     options: {
       chart: {
         width: 380,
@@ -37,7 +38,8 @@ export const PieChart = ({ cash, portfolioValue, holdingsValue }: Props) => {
       <Box width={0.27} >
       <Paper id="chart" >
         <Typography variant="h6">Total Value: ${portfolioValue}</Typography>
-        <Chart options={chart.options} series={[Number(holdingsValue.toFixed(2)), Number(cash.toFixed(2))]} type="pie" width={380} />
+        <Typography variant="h6">Your Funds: ${cash?.toFixed(2)}</Typography>
+        <Chart options={chart.options} series={[Number(holdingsValue?.toFixed(2)), Number(cash?.toFixed(2))]} type="pie" width={380} />
       </Paper>
     </Box>
   )

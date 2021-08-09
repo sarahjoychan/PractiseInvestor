@@ -1,9 +1,10 @@
 /* eslint-disable */
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 
-// should store in env file
-const baseURL = 'https://api.twelvedata.com';
-const apiKey = 'a6419f0e48c14c67a02ebc4e94b4c478';
+const baseURL = process.env.REACT_APP_API_STOCKPRICE_URL;
+const apiKey = process.env.REACT_APP_API_STOCKPRICE_KEY;
 
 // get a current price of a stock
 export const getCurrentPrice = (ticker) => {

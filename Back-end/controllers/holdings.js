@@ -53,10 +53,10 @@ exports.updateHoldings = async (req, res) => {
         return;
       }
     } else { // if a sell order
-      if (activity.quantity === companyHolding.quantity) companyHolding = false;// if selling all your current shares remove the whole object
-      else { // if less then total quanitity
-        companyHolding.quantity -= activity.quantity; // subtract from current quantiity
-      }
+      // if selling all your current shares remove the whole object
+      if (activity.quantity === companyHolding.quantity) companyHolding = false;
+      // if less than total quanitity, subtract from current quantiity
+      else companyHolding.quantity -= activity.quantity;
     }
 
     // I have to do this above i think?

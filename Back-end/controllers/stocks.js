@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 const Stock = require('../models/stockModel');
 
 exports.getAllStocks = async (req, res) => {
@@ -25,4 +23,3 @@ exports.getMatchingStocks = async (req, res) => {
     res.send(error);
   }
 };
-

@@ -22,17 +22,17 @@ export const Holdings = () => {
   const [portfolioValue, setPortfolioValue] = useState<number>(0);
 
   const { holdings, cash } = useSelector((state: any) => state.holdings); // state object is all the states within the combine reducer in index.js in reducer folder
-
+  
   useEffect(() => {
     function getPrice () {
-      const apiCallArray = holdings.map(async (holding: NoPriceHoldingI) => {
+      const apiCallArray = holdings?.map(async (holding: NoPriceHoldingI) => {
         const price = Number((await getCurrentPrice(holding.ticker)).data.price)
         return {...holding, price };
-      });
-      Promise.all<HoldingI>(apiCallArray).then((res: HoldingI[]) => {
+      });      
+      apiCallArray && Promise.all<HoldingI>(apiCallArray).then((res: HoldingI[]) => {
         setHoldingsPrices(res);
         let calcPortfolioValue = cash;
-        res.forEach((holding: HoldingI)=>{
+        res && res.forEach((holding: HoldingI)=>{
           calcPortfolioValue += holding.price*holding.quantity;
         });
         setPortfolioValue(Number(calcPortfolioValue.toFixed(2)));
@@ -52,7 +52,7 @@ export const Holdings = () => {
       <Box m={1}>
         <PieChart portfolioValue={portfolioValue} cash={cash} holdingsValue={portfolioValue-cash} b="2rem"/>
       </Box>
-      {!holdings.length ? <p>No Holdings, buy a stock</p> : (
+      {!holdings?.length ? <p>No Holdings, buy a stock</p> : (
         <Box m={1}>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">

@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
 const { generateToken } = require('../generateToken');
@@ -55,7 +54,6 @@ exports.getUser = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { userName, password } = req.body;
-
   if (!userName || !password) return res.status(400).send({ message: 'Please enter all fields.' });
 
   try {

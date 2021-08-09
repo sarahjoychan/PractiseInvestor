@@ -1,5 +1,5 @@
 import React, { useState, useEffect, MouseEvent, KeyboardEvent } from 'react';
-import decode from 'jwt-decode';
+// import decode from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
@@ -31,38 +31,37 @@ import {
 } from '@material-ui/icons';
 
 import useStyles from './styles';
-import { LOGOUT } from '../../constants/actionTypes';
-import { JwtTokenI } from '../../interfaces/JwtToken';
+import { EReduxActionTypes } from '../../constants/actionTypes';
+// import { JwtTokenI } from '../../interfaces/JwtToken';
+// import { HeaderHomeI } from '../../interfaces/HeaderHome';
 
 interface Props {
   title: string;
   toggleComponent: (str: string) => void; 
 }
 
-const NavBar = (props: Props) => {
+const NavBar = ({title, toggleComponent}: Props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<HTMLElement | null>(null);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('home') || "{}"));
+  const [user, setUser] = useState<any>(JSON.parse(localStorage.getItem('home') || "{}"));
   
   const dispatch = useDispatch();
   const location = useLocation();
-  const history = useHistory();
+  const history: any = useHistory();
 
   const signOut = () => {
-    dispatch({ type: LOGOUT });
+    dispatch({ type: EReduxActionTypes.LOGOUT });
     history.push('/auth');
     setUser(null);
   };
 
   useEffect(() => {
-    const token = user?.token;
-
-    if (token) {
-      const decodedToken = decode<JwtTokenI>(token);
-
-      if (decodedToken.expiresIn * 1000 < new Date().getTime()) signOut();
-    }
+    // const token: any = user?.token;
+    // if (user.token) {
+    //   const decodedToken = decode<JwtTokenI>(token);
+    //   if (decodedToken.expiresIn * 1000 < new Date().getTime()) signOut();
+    // }
 
     setUser(JSON.parse(localStorage.getItem('home') || "{}"));
   }, [location]);
@@ -112,15 +111,15 @@ const NavBar = (props: Props) => {
       onKeyDown={toggleDrawerKey(anchor, false)}
     >
       <List>
-        <ListItem button key={'Dashboard'} onClick={() => props.toggleComponent('Dashboard')}>
+        <ListItem button key={'Dashboard'} onClick={() => toggleComponent('Dashboard')}>
           <ListItemIcon><DashboardIcon /></ListItemIcon>
           <ListItemText primary={'Dashboard'} />
         </ListItem>
-        <ListItem button key={'Order'} onClick={() => props.toggleComponent('Order')}>
+        <ListItem button key={'Order'} onClick={() => toggleComponent('Order')}>
           <ListItemIcon><StoreIcon /></ListItemIcon>
           <ListItemText primary={'Order'} />
         </ListItem>
-        <ListItem button key={'Past Activities'} onClick={() => props.toggleComponent('Past Activities')}>
+        <ListItem button key={'Past Activities'} onClick={() => toggleComponent('Past Activities')}>
           <ListItemIcon><LocalActivityIcon /></ListItemIcon>
           <ListItemText primary={'Past Activities'} />
         </ListItem>
@@ -128,11 +127,11 @@ const NavBar = (props: Props) => {
       </List>
       <Divider />
       <List>
-          <ListItem button key={'Ranking'} onClick={() => props.toggleComponent('Ranking')}>
+          <ListItem button key={'Ranking'} onClick={() => toggleComponent('Ranking')}>
             <ListItemIcon><EqualizerIcon /></ListItemIcon>
             <ListItemText primary={'Ranking'} />
           </ListItem>
-          <ListItem button key={'News'} onClick={() => props.toggleComponent('News')}>
+          <ListItem button key={'News'} onClick={() => toggleComponent('News')}>
             <ListItemIcon><AnnouncementIcon /></ListItemIcon>
             <ListItemText primary={'News'} />
           </ListItem>
@@ -201,7 +200,7 @@ const NavBar = (props: Props) => {
             </>
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            {props.title}
+            {title}
           </Typography>
           <div className={classes.grow} />
           <Typography className={classes.title} variant="h6" noWrap>

@@ -23,7 +23,7 @@ router.post('/user/login', login);
 router.put('/user/updateHolding', authenticate, updateHoldings);// when user adds/deletes a holding affects cash, investments, activities,
 
 // to be able to get the ranking
-router.get('/users/ranking', getRanking)
+router.get('/users/ranking', getRanking);
 
 // stock filter api (name and ticker)
 router.get('/stocks', getAllStocks);

@@ -14,6 +14,7 @@ const authenticate = async (req, res, next) => {
       res.status(401).send({ message: 'No token, authorization denied.' });
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
   }
 };
