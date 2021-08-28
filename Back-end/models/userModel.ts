@@ -1,4 +1,4 @@
-const mongoose = require('./index');
+import mongoose from './index';
 
 const userSchema = new mongoose.Schema({
   userName: {
@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
 });
 // Mongoose automatically looks for the plural, lowercased version of your model name. Thus,
 // for the example above, the model User is for the users collection in the database.
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);
 
 /*
 

@@ -1,6 +1,8 @@
-const Stock = require('../models/stockModel');
+import Stock from '../models/stockModel';
+import { Request, Response } from 'express';
+import request from 'request';
 
-exports.getAllStocks = async (req, res) => {
+export const getAllStocks = async (req: Request, res: Response) => {
   try {
     const stocks = await Stock.find();
     res.status(200);
@@ -11,7 +13,7 @@ exports.getAllStocks = async (req, res) => {
   }
 };
 
-exports.getMatchingStocks = async (req, res) => {
+export const getMatchingStocks = async (req: Request, res: Response) => {
   try {
     const { filter } = req.params;
     const regex = new RegExp([filter].join(''), 'i');

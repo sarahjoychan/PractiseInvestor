@@ -9,15 +9,15 @@ interface Props {
 export const PastActivity = ({ activity }: Props) => {
   return (
     <TableRow>
-      <TableCell component="th" scope="activity">
+      <TableCell component="th" scope="activity" data-testid="activity-date">
         {activity.date}
       </TableCell>
-      <TableCell align="right">{activity.company}</TableCell>
-      <TableCell align="right">{activity.ticker}</TableCell>
-      <TableCell align="right">{activity.action}</TableCell>
-      <TableCell align="right">{activity.quantity}</TableCell>
-      <TableCell align="right">${activity.price.toFixed(2)}</TableCell>
-      <TableCell align="right">${activity.netAmount.toFixed(2)}</TableCell>
+      <TableCell align="right" data-testid="activity-company">{activity.company}</TableCell>
+      <TableCell align="right" data-testid="activity-ticker">{activity.ticker}</TableCell>
+      <TableCell align="right" data-testid="activity-action">{activity.action}</TableCell>
+      <TableCell align="right" data-testid="activity-quantity">{activity.quantity}</TableCell>
+      <TableCell align="right" data-testid="activity-price">{activity.price.toLocaleString('en-us', {style: 'currency', currency:'USD'})}</TableCell>
+      <TableCell align="right" data-testid="activity-netAmount">{activity.netAmount.toLocaleString('en-us', {style: 'currency', currency:'USD'})}</TableCell>
     </TableRow>
   )
 };

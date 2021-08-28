@@ -1,4 +1,4 @@
-export default interface Ranking {
+export default interface RankingI {
   userName: string;
   totalValue: number;
   totalNumberOfActivities: number;

@@ -14,7 +14,6 @@ import {
   TableRow} from '@material-ui/core';
 import UserRanking from './UserRanking/UserRanking';
 import { getRanking } from '../../api/backendApi';
-import PacmanLoader from "react-spinners/PacmanLoader";
 import TablePaginationActions from '../../utils/TablePaginationActions';
 
 const useStyles2 = makeStyles({
@@ -24,7 +23,6 @@ const useStyles2 = makeStyles({
 });
 
 export const CustomPaginationActionsTable = () => {
-  const [loading, setLoading] = useState(false);
   const classes = useStyles2();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -33,10 +31,6 @@ export const CustomPaginationActionsTable = () => {
 
   useEffect(() => {
     (async function useEffectFunc () {
-      // setLoading(true);
-      // setTimeout(() => {
-      //   setLoading(false);
-      // }, 100);
       const ranking = await getRanking();
       setRankings(ranking.data);
     })()}, []);
@@ -54,10 +48,7 @@ export const CustomPaginationActionsTable = () => {
   
   return (
     <>
-    {loading 
-      ? <div className="Homepage"><PacmanLoader color={"blue"} loading={loading} size={45} />
-      </div>
-      :<Box m={1}>
+      <Box m={1}>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="custom pagination table">
             <TableHead>
@@ -103,7 +94,6 @@ export const CustomPaginationActionsTable = () => {
           </Table>
         </TableContainer>
         </Box>
-      }
     </>
   );
 }

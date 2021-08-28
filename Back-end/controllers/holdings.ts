@@ -1,4 +1,7 @@
-const User = require('../models/userModel');
+import { ActivityI } from '../interfaces/Activity';
+import User from '../models/userModel';
+import { Response } from 'express';
+import { HoldingI } from '../interfaces/Holding';
 
 // when user buys/sells a holding
 // router.put('/users/:username', updateUser)//when user adds/deletes a holding affects cash, activities,
@@ -6,7 +9,8 @@ const User = require('../models/userModel');
 
 // push onto acitivities of user
 // change the cash amount left : cash - netamount
-async function pushActivityChangeCash(username, activity) {
+
+async function pushActivityChangeCash(username: string, activity: ActivityI) {
   return await User.findOneAndUpdate(
     { userName: username },
     {
@@ -17,7 +21,7 @@ async function pushActivityChangeCash(username, activity) {
   );
 }
 
-exports.updateHoldings = async (req, res) => {
+export const updateHoldings = async (req: any, res: Response) => {
   try {
     const username = req.user.userName;
     const activity = req.body;
@@ -29,7 +33,7 @@ exports.updateHoldings = async (req, res) => {
     /// /////////////////////////////////////////////////////////////////////////////////////
     // add or delete from holdings, if holdings zero need to remove the whole object for that company
     const userHoldings = (await User.findOne({ userName: username }, 'holdings')).holdings;
-    let companyHolding = userHoldings.filter((userHolding) => userHolding.company === activity.company)[0];
+    let companyHolding = userHoldings.filter((userHolding: HoldingI) => userHolding.company === activity.company)[0];
 
     if (activity.action === 'buy') { // checks if its a buy order
       if (companyHolding) { // checks if currently owns the stock

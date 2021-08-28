@@ -13,7 +13,6 @@ export const getAllHoldings = () => async (dispatch: (arg: { type: string; paylo
       type: EReduxActionTypes.FETCH_HOLDINGS,
       payload: { holdings, cash },
     };
-
     dispatch(action);
   } catch (error) {
     console.log(error.message);
@@ -24,12 +23,10 @@ export const updateHoldings = (order: StockI) => async (dispatch: (arg: { type: 
   try {
     const { data } = await putHoldings(order);
     const { holdings, cash } = data;
-
     const action = {
       type: EReduxActionTypes.UPDATE_HOLDING,
       payload: { holdings, cash },
     };
-
     dispatch(action);
   } catch (error) {
     console.log(error.message);

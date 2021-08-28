@@ -1,4 +1,4 @@
-const mongoose = require('./index');
+import mongoose from './index';
 
 const stockSchema = new mongoose.Schema({
   symbol: {
@@ -10,4 +10,4 @@ const stockSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Stock', stockSchema);
+export default mongoose.model('Stock', stockSchema);

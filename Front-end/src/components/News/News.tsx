@@ -23,15 +23,10 @@ const useStyles = makeStyles({
 
 //export default News;
 export default function News(): ReactElement {
-  const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const [articles, setArticles] = useState<ArticlesI[]>([]);
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
     async function getArticles () {
       setArticles((await topNews()).data.articles);
     }
@@ -44,43 +39,40 @@ export default function News(): ReactElement {
   }, []);
 
   return (
-      <>
-        {
-          loading ? <div className="Homepage"><PacmanLoader color={"blue"} loading={loading} size={45} /></div>
-          :
-        <>
-        <Box display="flex" flexWrap="wrap" justifyContent="center">
-          {articles.map(article => ( article.source.name !== "Bloomberg" && //get rid of bloomberg they have some protection
-            <Box m={1} width={0.3}>
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    alt="article"
-                    height="140"
-                    image={article.urlToImage}
-                    title="article"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="inherit" component="h2">
-                    {article.title}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    {article.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary" target="_blank" href={article.url}>
-                    Learn More
-                  </Button>
-                </CardActions>
-              </Card>
-            </Box>
-          ))}
+      (articles && articles.length) ?
+      <Box display="flex" flexWrap="wrap" justifyContent="center">
+        {articles.map(article => ( article.source.name !== "Bloomberg" && //get rid of bloomberg they have some protection
+          <Box m={1} width={0.3}>
+            <Card className={classes.root}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="article"
+                  height="140"
+                  image={article.urlToImage}
+                  title="article"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="inherit" component="h2">
+                  {article.title}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                  {article.description}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button size="small" color="primary" target="_blank" href={article.url}>
+                  Learn More
+                </Button>
+              </CardActions>
+            </Card>
           </Box>
-        </>
-        }
-      </>
+        ))}
+      </Box>
+      :
+      <div className="loader-box">
+        <PacmanLoader color={'blue'} size={45} />
+      </div>
   )
 }

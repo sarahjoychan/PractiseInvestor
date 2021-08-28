@@ -1,9 +1,11 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/userModel');
-const { generateToken } = require('../generateToken');
-require('dotenv').config();
+import User from '../models/userModel';
+import { generateToken } from '../generateToken';
+import { Request, Response } from 'express';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-exports.getAllUsers = async (req, res) => {
+export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const users = await User.find();
     res.status(200);
@@ -14,33 +16,33 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-exports.createUser = async (req, res) => {
+export const createUser = async (req: Request, res: Response) => {
   const { userName, password, confirmPassword } = req.body;
-
   if (!userName || !password || !confirmPassword) return res.status(400).send({ message: 'Please enter all fields.' });
 
   try {
     const user = await User.findOne({ userName });
     if (user) {
-      return res.status(400).send({ message: 'Username taken, chose another one.' });
+      return res.status(400).send({ message: 'Username taken, choose another one.' });
     }
     if (password !== confirmPassword) {
       return res.status(400).send({ message: "Passwords don't match." });
     }
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
-    const newUser = await User.create({ userName, password: hashedPassword });
+    const newUser: any = await User.create({ userName, password: hashedPassword });
     res.status(201).send({
       userName: newUser.userName,
       token: generateToken(userName),
     });
   } catch (error) {
+    console.log(`Could not create user: ${error}`)
     res.status(500);
     res.send(error);
   }
 };
 
-exports.getUser = async (req, res) => {
+export const getUser = async (req: any, res: Response) => {
   try {
     const { userName } = req.user;
     const user = await User.findOne({ userName }).select('-password');
@@ -52,12 +54,12 @@ exports.getUser = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req: Request, res: Response) => {
   const { userName, password } = req.body;
   if (!userName || !password) return res.status(400).send({ message: 'Please enter all fields.' });
 
   try {
-    const user = await User.findOne({ userName });
+    const user: any = await User.findOne({ userName });
     if (!user) return res.status(404).send({ message: 'Cannot find user.' });
     if (await bcrypt.compare(password, user.password)) {
       res.status(200).send(
@@ -73,4 +75,10 @@ exports.login = async (req, res) => {
     res.status(500);
     res.send(error);
   }
+};
+
+export const totalValueHistory = async (_id: string, totalValue: number, date: Date | string)=> {
+  User.updateOne({ _id }, { $push: { totalValueHistory: { totalValue, date } } })
+    .then((success: any) => console.log(success))
+    .catch((err: Error) => console.log(err));
 };

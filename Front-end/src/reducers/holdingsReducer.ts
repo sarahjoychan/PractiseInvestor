@@ -14,6 +14,8 @@ const holdingsReducer = (holdings: Holdings[] = [], action:IReduxBaseAction) => 
       return action.payload;
     case EReduxActionTypes.UPDATE_HOLDING:
       return action.payload;
+    case EReduxActionTypes.CLEAR_HOLDINGS:
+      return {holdings: [], cash: 0};
     default:
       return holdings;
   }

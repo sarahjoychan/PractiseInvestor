@@ -1,15 +1,12 @@
-const { Router } = require('express');
-const authenticate = require('../middleware/authenticate');
+import { Router } from 'express';
+import { authenticate } from '../middleware/authenticate';
+// import controller functions
+import { getAllUsers, createUser, getUser, login } from '../controllers/users';
+import { updateHoldings } from '../controllers/holdings';
+import { getAllStocks, getMatchingStocks } from '../controllers/stocks';
+import { getRanking } from '../controllers/ranking';
 
 const router = Router();
-
-// import controller functions
-const {
-  getAllUsers, createUser, getUser, login,
-} = require('../controllers/users');
-const { updateHoldings } = require('../controllers/holdings');
-const { getAllStocks, getMatchingStocks } = require('../controllers/stocks');
-const { getRanking } = require('../controllers/ranking');
 
 // HTTP requests (get, post, put, delete)
 
@@ -29,7 +26,7 @@ router.get('/users/ranking', getRanking);
 router.get('/stocks', getAllStocks);
 router.get('/stocks/:filter', getMatchingStocks);
 
-module.exports = router;
+export default router;
 
 // PUT => If user can update all or just a portion of the record
 // PATCH => If user can only update a partial record

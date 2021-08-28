@@ -1,4 +1,4 @@
-const mongoose = require('./index');
+import mongoose from './index';
 
 const rankSchema = new mongoose.Schema({
   userName: {
@@ -21,4 +21,4 @@ const rankSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Ranking', rankSchema);
+export default mongoose.model('Ranking', rankSchema);

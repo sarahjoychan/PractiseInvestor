@@ -11,7 +11,7 @@ export const Homepage = () => {
 
   const [component, setComponent] = useState('Dashboard');
   const [title, setTitle] = useState('Practise Investing');  
-   //Dashboard, Order, Past Acitivities, Ranking
+  const [portfolioValue, setPortfolioValue] = useState<number>(0);
    const toggleComponent = (componentString: string): void => {
     setComponent(componentString);
     setTitle(componentString);
@@ -19,8 +19,8 @@ export const Homepage = () => {
 
   return (
     <>
-      <NavBar toggleComponent={toggleComponent} title={title} />
-      {component === 'Dashboard' && <Dashboard />}
+      <NavBar toggleComponent={toggleComponent} setPortfolioValue={setPortfolioValue} title={title} />
+      {component === 'Dashboard' && <Dashboard toggleComponent={toggleComponent} portfolioValue={portfolioValue} setPortfolioValue={setPortfolioValue}/>}
       {component === 'Order' && <Order toggleComponent={toggleComponent} />}
       {component === 'Past Activities' && <PastActivities />}
       {component === 'Ranking' && <UsersRankings />}

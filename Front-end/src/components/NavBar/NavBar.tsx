@@ -1,5 +1,4 @@
 import React, { useState, useEffect, MouseEvent, KeyboardEvent } from 'react';
-// import decode from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
@@ -32,15 +31,15 @@ import {
 
 import useStyles from './styles';
 import { EReduxActionTypes } from '../../constants/actionTypes';
-// import { JwtTokenI } from '../../interfaces/JwtToken';
-// import { HeaderHomeI } from '../../interfaces/HeaderHome';
+
 
 interface Props {
   title: string;
-  toggleComponent: (str: string) => void; 
+  toggleComponent: (str: string) => void;
+  setPortfolioValue: (num: number) => void;
 }
 
-const NavBar = ({title, toggleComponent}: Props) => {
+const NavBar = ({title, toggleComponent, setPortfolioValue}: Props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<HTMLElement | null>(null);
@@ -52,17 +51,13 @@ const NavBar = ({title, toggleComponent}: Props) => {
 
   const signOut = () => {
     dispatch({ type: EReduxActionTypes.LOGOUT });
+    dispatch({ type: EReduxActionTypes.CLEAR_HOLDINGS });
+    setPortfolioValue(0);
     history.push('/auth');
     setUser(null);
   };
 
   useEffect(() => {
-    // const token: any = user?.token;
-    // if (user.token) {
-    //   const decodedToken = decode<JwtTokenI>(token);
-    //   if (decodedToken.expiresIn * 1000 < new Date().getTime()) signOut();
-    // }
-
     setUser(JSON.parse(localStorage.getItem('home') || "{}"));
   }, [location]);
 

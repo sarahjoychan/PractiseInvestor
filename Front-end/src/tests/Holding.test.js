@@ -32,4 +32,7 @@ test('should render Holding component', () => {
   expect(screen.getByTestId('holding-avgCost')).toBeInTheDocument();
   expect(screen.getByTestId('holding-avgCost').textContent).toBe("$14.01");
 
+  expect(screen.getByTestId('holding-avgTotalCost')).toBeInTheDocument();
+  expect(screen.getByTestId('holding-avgTotalCost').textContent).toBe("$1,260.90");
+
 })
