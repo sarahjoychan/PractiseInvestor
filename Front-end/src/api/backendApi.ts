@@ -10,6 +10,7 @@ API.interceptors.request.use((req) => { // attach token to all headers in all re
   const home: any = localStorage.getItem('home');
   if (localStorage.getItem('home')) {
     req.headers['x-auth-token'] = `${JSON.parse(home).token}`;
+
   }
   return req;
 });

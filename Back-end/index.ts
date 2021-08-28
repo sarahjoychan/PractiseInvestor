@@ -6,7 +6,6 @@ import { storeRanking } from './controllers/ranking';
 
 export const server = (PORT: number | string) => {
   const app = express();
-  
   app.use(cors());// allows server to interact with the client side
   app.use(express.json());// parses(analyzing) incoming requests with JSON
   app.use(express.urlencoded({ extended: true }));
