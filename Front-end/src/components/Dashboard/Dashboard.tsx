@@ -1,4 +1,6 @@
+
 import { useEffect, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { Holdings } from './Holdings/Holdings';
 import { getAllHoldings } from '../../actions/holdings';
@@ -18,6 +20,7 @@ export const Dashboard = ({toggleComponent, setPortfolioValue, portfolioValue}: 
   const dispatch = useDispatch(); // allows us to dispatch an action
   const [loading, setLoading] = useState(true);
   const [holdingsPrices, setHoldingsPrices] = useState<HoldingI[]>([]);
+
 
   useEffect(() => {    
     dispatch(getAllHoldings());
@@ -59,3 +62,4 @@ export const Dashboard = ({toggleComponent, setPortfolioValue, portfolioValue}: 
     </div>
   )
 }
+
