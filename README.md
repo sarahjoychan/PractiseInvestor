@@ -16,7 +16,7 @@ Pactise Investor allows users to buy and sell stock with real-time stock market 
 
 ### Built With
 
-* Front End: [React](https://reactjs.org/), [Redux](https://redux.js.org/), [Material UI](https://material-ui.com/), [Axios](https://axios-http.com/), [CanvaJS](https://canvasjs.com/), [Apex Charts](https://apexcharts.com/)
+* Front End: [React](https://reactjs.org/), [Redux](https://redux.js.org/), [Material UI](https://material-ui.com/), [Axios](https://axios-http.com/), [CanvasJS](https://canvasjs.com/), [Apex Charts](https://apexcharts.com/)
 * Back End: [MongoDB](https://www.mongodb.com/), [Mongoose](https://mongoosejs.com/), [NodeJS](https://nodejs.org/en/), [Express](http://expressjs.com/), [JWT](https://jwt.io/)
 * Others: [Typescript](https://www.typescriptlang.org/)
 
