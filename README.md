@@ -7,13 +7,6 @@ Pactise Investor allows users to buy and sell stock with real-time stock market 
 ![Practise Investor Screen Shot 2](./preview_images/Practise-preview2.png)
 ![Practise Investor Screen Shot 3](./preview_images/Practise-preview2.png)
 
-
-## Contributors
-* Rahmat Yousufi [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/rahmatyousufi/)
-* Joseph Kranak [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/joseph-kranak/)
-* Bianca Procopio [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/bianca-procopio/)
-* Sarah Shaffer [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/sarah-shaffer-63a662208/)
-
 ### Built With
 
 * Front End: [React](https://reactjs.org/), [Redux](https://redux.js.org/), [Material UI](https://material-ui.com/), [Axios](https://axios-http.com/), [CanvasJS](https://canvasjs.com/), [Apex Charts](https://apexcharts.com/)
@@ -69,6 +62,12 @@ getStocks();
 PractiseInvestor/Back-end % nodemon start.ts
 PractiseInvestor/Front-end % npm start
 ```
+
+## Contributors
+* Rahmat Yousufi [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/rahmatyousufi/)
+* Joseph Kranak [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/joseph-kranak/)
+* Bianca Procopio [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/bianca-procopio/)
+* Sarah Shaffer [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/sarah-shaffer-63a662208/)
 
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
